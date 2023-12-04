@@ -58,9 +58,30 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/products/update/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await productCollection.findOne(query);
+      res.send(result);
+    });
+
     app.post("/products", async (req, res) => {
       const addedProduct = req.body;
       const result = await productCollection.insertOne(addedProduct);
+      res.send(result);
+    });
+
+    app.put("/product/update/:id", async (req, res) => {
+      const id = req.params.id;
+      const product = req.body;
+      const query = { _id: new ObjectId(id) };
+
+      const updateProduct = {
+        $set: product,
+      };
+
+      const result = await productCollection.updateOne(query, updateProduct);
+
       res.send(result);
     });
 
