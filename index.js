@@ -4,7 +4,16 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://eleventh-assignment-b4b1e.web.app",
+      "https://eleventh-assignment-b4b1e.firebaseapp.com",
+      "https://65a22df4e7ac418ed5c30c46--earnest-frangollo-46f67e.netlify.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 const uri =
